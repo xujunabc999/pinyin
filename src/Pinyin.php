@@ -30,15 +30,11 @@ class Pinyin
     const UNICODE = 'unicode';
 
     /**
-     * Dict loader.
-     *
      * @var \Overtrue\Pinyin\DictLoaderInterface
      */
     protected $loader;
 
     /**
-     * Punctuations map.
-     *
      * @var array
      */
     protected $punctuations = array(
@@ -180,11 +176,11 @@ class Pinyin
      */
     protected function prepare($string)
     {
-        $string = preg_replace_callback('~[a-z0-9_-]+~i', function ($matches) {
+        $string = preg_replace_callback('/[a-z0-9_-]+/i', function ($matches) {
             return "\t".$matches[0];
         }, $string);
 
-        return preg_replace("~[^\p{Han}\p{P}\p{Z}\p{M}\p{N}\p{L}\t]~u", '', $string);
+        return preg_replace("/[^\p{Han}\p{P}\p{Z}\p{M}\p{N}\p{L}\t]/u", '', $string);
     }
 
     /**
